@@ -14,6 +14,7 @@
     function autoload($class) {
 
         $directories = [
+            dirname(__DIR__).'/scripts/db/',
             dirname(__DIR__).'/scripts/staff/',
             dirname(__DIR__).'/scripts/staff/areas/',
             dirname(__DIR__).'/scripts/staff/areas/academic_area/',
@@ -36,6 +37,12 @@
             }
         }
     }
-    
+
     spl_autoload_register('autoload');
+
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+    
+
+    staff::getInstance(json_decode(file_get_contents("php://input"), true))->deleteStaff("13");
 ?>
