@@ -1,20 +1,20 @@
 <?php
 class regions extends connect{
-    private $queryPost = 'INSERT INTO regions(name_regions, id_country) VALUES(:regions,:country)';
+    private $queryPost = 'INSERT INTO regions(name_region, id_country) VALUES(:regions,:country)';
     private $queryGetAll = 'SELECT * FROM regions';
     private $queryGet = 'SELECT * FROM regions WHERE id = ?';
     private $queryDelete = 'DELETE FROM regions WHERE id = ?';
-    private $queryUpdate = 'UPDATE regions SET name_regions = ?, id_country = ? WHERE id = ?';
+    private $queryUpdate = 'UPDATE regions SET name_region = ?, id_country = ? WHERE id = ?';
     private $message;
     use getInstance;
-    function __construct(public $name_regions = 1, public $id_country = 1){
+    function __construct(public $name_region = 1, public $id_country = 1){
         parent::__construct();
     }
 
     public function postRegions(){
         try {
             $res = $this->conx->prepare($this->queryPost);
-            $res->bindValue("regions", $this->name_regions);
+            $res->bindValue("regions", $this->name_region);
             $res->bindValue("country", $this->id_country);
             $res->execute();
             $this->message = ["Code"=> 200+$res->rowCount(), "Message"=> "inserted data"];
@@ -63,10 +63,10 @@ class regions extends connect{
         }
     }
 
-    public function updateregions( $name_regions, $id_country, $id){
+    public function updateregions( $name_region, $id_country, $id){
         try{
           $res = $this->conx->prepare($this->queryUpdate);
-            $res->execute([$name_regions, $id_country, $id]);
+            $res->execute([$name_region, $id_country, $id]);
             $this->message = ["Code"=> 200+$res->rowCount(), "Message"=> "inserted data"];
         } catch(\PDOException $e) {
             $this->message = ["Code"=> $e->getCode(), "Message"=> $res->errorInfo()[2]];
