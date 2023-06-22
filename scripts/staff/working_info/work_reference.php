@@ -1,23 +1,23 @@
 <?php
-class personal_ref extends connect{
-    private $queryPost = 'INSERT INTO personal_ref(full_name, cel_number, relationship, occupation) VALUES(:fullName,:celNumber,:relationship,:occupation)';
-    private $queryGetAll = 'SELECT * FROM personal_ref';
-    private $queryGet = 'SELECT * FROM personal_ref WHERE id = ?';
-    private $queryDelete = 'DELETE FROM personal_ref WHERE id = ?';
-    private $queryUpdate = 'UPDATE personal_ref SET full_name = ?, cel_number = ?, relationship = ?, occupation = ? WHERE id = ?';
+class work_reference extends connect{
+    private $queryPost = 'INSERT INTO work_reference(full_name, cel_number, position, company) VALUES(:fullName,:celNumber,:position,:company)';
+    private $queryGetAll = 'SELECT * FROM work_reference';
+    private $queryGet = 'SELECT * FROM work_reference WHERE id = ?';
+    private $queryDelete = 'DELETE FROM work_reference WHERE id = ?';
+    private $queryUpdate = 'UPDATE work_reference SET full_name = ?, cel_number = ?, position = ?, company = ? WHERE id = ?';
     private $message;
     use getInstance;
-    function __construct(private $full_name = 1, public $cel_number = 1, public $relationship = 1, public $occupation = 1){
+    function __construct(private $full_name = 1, public $cel_number = 1, public $position = 1, public $company = 1){
         parent::__construct();
     }
 
-    public function postPersonal_ref(){
+    public function postWork_reference(){
         try {
             $res = $this->conx->prepare($this->queryPost);
             $res->bindValue("idStaff", $this->full_name);
             $res->bindValue("cel_number", $this->cel_number);
-            $res->bindValue("relationship", $this->relationship);
-            $res->bindValue("occupation", $this->occupation);
+            $res->bindValue("position", $this->position);
+            $res->bindValue("company", $this->company);
             $res->execute();
             $this->message = ["Code"=> 200+$res->rowCount(), "Message"=> "inserted data"];
         } catch(\PDOException $e) {
@@ -27,7 +27,7 @@ class personal_ref extends connect{
         }
     }
 
-    public function getAllPersonal_ref(){
+    public function getAllWork_reference(){
         try {
             $res = $this->conx->prepare($this->queryGetAll);
             $res->execute();
@@ -39,7 +39,7 @@ class personal_ref extends connect{
         }
     }
 
-    public function getPersonal_ref($id){
+    public function getWork_reference($id){
         try{
             $res = $this -> conx -> prepare($this -> queryGet);
             $res -> execute([$id]);
@@ -51,7 +51,7 @@ class personal_ref extends connect{
         }
     }
 
-    public function deletePersonal_ref($id){
+    public function deleteWork_reference($id){
         try{
 
             $res = $this -> conx -> prepare($this->queryDelete);
@@ -65,10 +65,10 @@ class personal_ref extends connect{
         }
     }
 
-    public function updatePersonal_ref( $full_name, $cel_number, $relationship, $occupation, $id){
+    public function updateWork_reference( $full_name, $cel_number, $position, $company, $id){
         try{
           $res = $this->conx->prepare($this->queryUpdate);
-            $res->execute([$full_name, $cel_number, $relationship, $occupation, $id]);
+            $res->execute([$full_name, $cel_number, $position, $company, $id]);
             $this->message = ["Code"=> 200+$res->rowCount(), "Message"=> "inserted data"];
         } catch(\PDOException $e) {
             $this->message = ["Code"=> $e->getCode(), "Message"=> $res->errorInfo()[2]];
