@@ -24,5 +24,7 @@
             "email": "rdayismar@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "bramus/router": "1.6"
+    }
 }
