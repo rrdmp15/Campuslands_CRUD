@@ -1,4 +1,5 @@
 <?php
+namespace App;
 class team_schedule extends connect{
     private $queryPost = 'INSERT INTO team_schedule(team_name, check_in_skills, check_out_skills, check_in_soft, check_out_soft, check_in_english, check_out_english, check_in_review, check_out_review, id_journey) VALUES(:teamName,:InSkills,:outSkills,:inSoft,:outSoft, :inEnglish, :outEnglish, :inReview, :outReview, :idJourney)';
     private $queryGetAll = 'SELECT * FROM team_schedule';
@@ -37,7 +38,7 @@ class team_schedule extends connect{
         try {
             $res = $this->conx->prepare($this->queryGetAll);
             $res->execute();
-            $this->message = ["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
+            $this->message = ["Code"=> 200, "Message"=> $res->fetchAll(\PDO::FETCH_ASSOC)];
         } catch(\PDOException $e) {
             $this->message = ["Code"=> $e->getCode(), "Message"=> $res->errorInfo()[2]];
         }finally{
@@ -49,7 +50,7 @@ class team_schedule extends connect{
         try{
             $res = $this -> conx -> prepare($this -> queryGet);
             $res -> execute([$id]);
-            $this -> message = ["Code" => "200", "Message" => $res -> fetch(PDO::FETCH_ASSOC)];
+            $this -> message = ["Code" => "200", "Message" => $res -> fetch(\PDO::FETCH_ASSOC)];
         }catch(\PDOException $e){
             $this -> message = ["Code" => $e -> getCode(), "Message" => $res -> errorInfo()[2]];
         }finally{
@@ -62,7 +63,7 @@ class team_schedule extends connect{
 
             $res = $this -> conx -> prepare($this->queryDelete);
             $res -> execute([$id]);
-            $this -> message = ["Code" => 200, "Message" => $res -> fetch(PDO::FETCH_ASSOC)];
+            $this -> message = ["Code" => 200, "Message" => $res -> fetch(\PDO::FETCH_ASSOC)];
 
         }catch(\PDOException $e){
             $this -> message = ["Code" => $e -> getCode(), "Message" => $res -> errorInfo()[2]];

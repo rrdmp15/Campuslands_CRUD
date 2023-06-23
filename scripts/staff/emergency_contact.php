@@ -1,4 +1,5 @@
 <?php
+    namespace App;
 class emergency_contact extends connect{
     private $queryPost = 'INSERT INTO emergency_contact(id_staff, cel_number, relationship, full_name, email) VALUES(:idStaff,:celNumber,:relationship,:fullName,:email)';
     private $queryGetAll = 'SELECT * FROM emergency_contact';
@@ -32,7 +33,7 @@ class emergency_contact extends connect{
         try {
             $res = $this->conx->prepare($this->queryGetAll);
             $res->execute();
-            $this->message = ["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
+            $this->message = ["Code"=> 200, "Message"=> $res->fetchAll(\PDO::FETCH_ASSOC)];
         } catch(\PDOException $e) {
             $this->message = ["Code"=> $e->getCode(), "Message"=> $res->errorInfo()[2]];
         }finally{
@@ -44,7 +45,7 @@ class emergency_contact extends connect{
         try{
             $res = $this -> conx -> prepare($this -> queryGet);
             $res -> execute([$id]);
-            $this -> message = ["Code" => "200", "Message" => $res -> fetch(PDO::FETCH_ASSOC)];
+            $this -> message = ["Code" => "200", "Message" => $res -> fetch(\PDO::FETCH_ASSOC)];
         }catch(\PDOException $e){
             $this -> message = ["Code" => $e -> getCode(), "Message" => $res -> errorInfo()[2]];
         }finally{
@@ -57,7 +58,7 @@ class emergency_contact extends connect{
 
             $res = $this -> conx -> prepare($this->queryDelete);
             $res -> execute([$id]);
-            $this -> message = ["Code" => 200, "Message" => $res -> fetch(PDO::FETCH_ASSOC)];
+            $this -> message = ["Code" => 200, "Message" => $res -> fetch(\PDO::FETCH_ASSOC)];
 
         }catch(\PDOException $e){
             $this -> message = ["Code" => $e -> getCode(), "Message" => $res -> errorInfo()[2]];

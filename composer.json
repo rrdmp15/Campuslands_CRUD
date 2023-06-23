@@ -1,0 +1,28 @@
+{
+    "name": "spukm01-091/campuslands_crud",
+    "description": "...",
+    "license": "LTS",
+    "autoload": {
+        "psr-4": {
+            "App\\": [
+            "./scripts/staff",
+            "./scripts/staff/areas/",
+            "./scripts/staff/areas/academic_area/",
+            "./scripts/staff/areas/academic_area/team_educators/",
+            "./scripts/staff/areas/academic_area/team_educators/trainers/",
+            "./scripts/staff/journey/",
+            "./scripts/staff/journey/locations/",
+            "./scripts/staff/working_info/",
+            "./scripts/db/",
+            "./scripts/system/"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "rrdmp15",
+            "email": "rdayismar@gmail.com"
+        }
+    ],
+    "require": {}
+}

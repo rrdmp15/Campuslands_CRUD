@@ -1,4 +1,5 @@
 <?php
+namespace App;
 class levels extends connect{
     private $queryPost = 'INSERT INTO levels(name_level, group_level) VALUES(:levels,:group)';
     private $queryGetAll = 'SELECT * FROM levels';
@@ -29,7 +30,7 @@ class levels extends connect{
         try {
             $res = $this->conx->prepare($this->queryGetAll);
             $res->execute();
-            $this->message = ["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
+            $this->message = ["Code"=> 200, "Message"=> $res->fetchAll(\PDO::FETCH_ASSOC)];
         } catch(\PDOException $e) {
             $this->message = ["Code"=> $e->getCode(), "Message"=> $res->errorInfo()[2]];
         }finally{
@@ -41,7 +42,7 @@ class levels extends connect{
         try{
             $res = $this -> conx -> prepare($this -> queryGet);
             $res -> execute([$id]);
-            $this -> message = ["Code" => "200", "Message" => $res -> fetch(PDO::FETCH_ASSOC)];
+            $this -> message = ["Code" => "200", "Message" => $res -> fetch(\PDO::FETCH_ASSOC)];
         }catch(\PDOException $e){
             $this -> message = ["Code" => $e -> getCode(), "Message" => $res -> errorInfo()[2]];
         }finally{
@@ -54,7 +55,7 @@ class levels extends connect{
 
             $res = $this -> conx -> prepare($this->queryDelete);
             $res -> execute([$id]);
-            $this -> message = ["Code" => 200, "Message" => $res -> fetch(PDO::FETCH_ASSOC)];
+            $this -> message = ["Code" => 200, "Message" => $res -> fetch(\PDO::FETCH_ASSOC)];
 
         }catch(\PDOException $e){
             $this -> message = ["Code" => $e -> getCode(), "Message" => $res -> errorInfo()[2]];

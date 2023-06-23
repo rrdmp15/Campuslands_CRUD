@@ -1,4 +1,5 @@
 <?php
+namespace App;
 class topics extends connect{
     private $queryPost = 'INSERT INTO topics(id_module, name_topic, start_date, end_date, description, duration_days) VALUES(:module,:nameTopic, :startDate, :endDate, :description, :durationDays)';
     private $queryGetAll = 'SELECT * FROM topics';
@@ -33,7 +34,7 @@ class topics extends connect{
         try {
             $res = $this->conx->prepare($this->queryGetAll);
             $res->execute();
-            $this->message = ["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
+            $this->message = ["Code"=> 200, "Message"=> $res->fetchAll(\PDO::FETCH_ASSOC)];
         } catch(\PDOException $e) {
             $this->message = ["Code"=> $e->getCode(), "Message"=> $res->errorInfo()[2]];
         }finally{
@@ -45,7 +46,7 @@ class topics extends connect{
         try{
             $res = $this -> conx -> prepare($this -> queryGet);
             $res -> execute([$id]);
-            $this -> message = ["Code" => "200", "Message" => $res -> fetch(PDO::FETCH_ASSOC)];
+            $this -> message = ["Code" => "200", "Message" => $res -> fetch(\PDO::FETCH_ASSOC)];
         }catch(\PDOException $e){
             $this -> message = ["Code" => $e -> getCode(), "Message" => $res -> errorInfo()[2]];
         }finally{
@@ -58,7 +59,7 @@ class topics extends connect{
 
             $res = $this -> conx -> prepare($this->queryDelete);
             $res -> execute([$id]);
-            $this -> message = ["Code" => 200, "Message" => $res -> fetch(PDO::FETCH_ASSOC)];
+            $this -> message = ["Code" => 200, "Message" => $res -> fetch(\PDO::FETCH_ASSOC)];
 
         }catch(\PDOException $e){
             $this -> message = ["Code" => $e -> getCode(), "Message" => $res -> errorInfo()[2]];

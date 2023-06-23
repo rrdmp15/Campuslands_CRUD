@@ -1,4 +1,5 @@
 <?php
+namespace App;
 class teachers extends connect{
     private $queryPost = 'INSERT INTO teachers(id_staff, id_academic_area, id_position) VALUES(:staff,:academicArea, :position)';
     private $queryGetAll = 'SELECT * FROM teachers';
@@ -30,7 +31,7 @@ class teachers extends connect{
         try {
             $res = $this->conx->prepare($this->queryGetAll);
             $res->execute();
-            $this->message = ["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
+            $this->message = ["Code"=> 200, "Message"=> $res->fetchAll(\PDO::FETCH_ASSOC)];
         } catch(\PDOException $e) {
             $this->message = ["Code"=> $e->getCode(), "Message"=> $res->errorInfo()[2]];
         }finally{
@@ -42,7 +43,7 @@ class teachers extends connect{
         try{
             $res = $this -> conx -> prepare($this -> queryGet);
             $res -> execute([$id]);
-            $this -> message = ["Code" => "200", "Message" => $res -> fetch(PDO::FETCH_ASSOC)];
+            $this -> message = ["Code" => "200", "Message" => $res -> fetch(\PDO::FETCH_ASSOC)];
         }catch(\PDOException $e){
             $this -> message = ["Code" => $e -> getCode(), "Message" => $res -> errorInfo()[2]];
         }finally{
@@ -55,7 +56,7 @@ class teachers extends connect{
 
             $res = $this -> conx -> prepare($this->queryDelete);
             $res -> execute([$id]);
-            $this -> message = ["Code" => 200, "Message" => $res -> fetch(PDO::FETCH_ASSOC)];
+            $this -> message = ["Code" => 200, "Message" => $res -> fetch(\PDO::FETCH_ASSOC)];
 
         }catch(\PDOException $e){
             $this -> message = ["Code" => $e -> getCode(), "Message" => $res -> errorInfo()[2]];
