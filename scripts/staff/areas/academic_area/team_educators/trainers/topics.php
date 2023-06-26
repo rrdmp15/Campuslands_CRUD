@@ -2,8 +2,11 @@
 namespace App;
 class topics extends connect{
     private $queryPost = 'INSERT INTO topics(id_module, name_topic, start_date, end_date, description, duration_days) VALUES(:module,:nameTopic, :startDate, :endDate, :description, :durationDays)';
-    private $queryGetAll = 'SELECT * FROM topics';
-    private $queryGet = 'SELECT * FROM topics WHERE id = ?';
+
+    private $queryGetAll = 'SELECT modules.name_module, topics.name_topic, topics.start_date, topics.end_date, topics.description, topics.duration_days FROM topics INNER JOIN modules ON topics.id_module = modules.id';
+
+    private $queryGet = 'SELECT modules.name_module, topics.name_topic, topics.start_date, topics.end_date, topics.description, topics.duration_days FROM topics INNER JOIN modules ON topics.id_module = modules.id WHERE id = ?';
+
     private $queryDelete = 'DELETE FROM topics WHERE id = ?';
     private $queryUpdate = 'UPDATE topics SET id_module = ?, name_topic = ?, start_date = ?, end_date = ?, description = ?, duration_days = ? WHERE id = ?';
     private $message;

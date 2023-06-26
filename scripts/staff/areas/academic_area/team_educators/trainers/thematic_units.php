@@ -2,8 +2,11 @@
 namespace App;
 class thematic_units extends connect{
     private $queryPost = 'INSERT INTO thematic_units(id_route, name_thematic_units, start_date, end_date, description, duration_days) VALUES(:route,:nameThematicUnits, :startDate, :endDate, :description, :durationDays)';
-    private $queryGetAll = 'SELECT * FROM thematic_units';
-    private $queryGet = 'SELECT * FROM thematic_units WHERE id = ?';
+
+    private $queryGetAll = 'SELECT routes.name_route, thematic_units.name_topic, thematic_units.start_date, thematic_units.end_date, thematic_units.description, thematic_units.duration_days FROM thematic_units INNER JOIN chapters ON thematic_units.id_chapter = chapters.id';
+
+    private $queryGet = 'SELECT routes.name_route, thematic_units.name_topic, thematic_units.start_date, thematic_units.end_date, thematic_units.description, thematic_units.duration_days FROM thematic_units INNER JOIN chapters ON thematic_units.id_chapter = chapters.id WHERE id = ?';
+
     private $queryDelete = 'DELETE FROM thematic_units WHERE id = ?';
     private $queryUpdate = 'UPDATE thematic_units SET id_route = ?, name_thematic_units = ?, start_date = ?, end_date = ?, description = ?, duration_days = ? WHERE id = ?';
     private $message;

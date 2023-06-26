@@ -2,8 +2,11 @@
 namespace App;
 class routes extends connect{
     private $queryPost = 'INSERT INTO routes(name_route, start_date, end_date, description, duration_days) VALUES(:nameRoute, :startDate, :endDate, :description, :durationDays)';
+
     private $queryGetAll = 'SELECT * FROM routes';
+
     private $queryGet = 'SELECT * FROM routes WHERE id = ?';
+    
     private $queryDelete = 'DELETE FROM routes WHERE id = ?';
     private $queryUpdate = 'UPDATE routes SET  name_route = ?, start_date = ?, end_date = ?, description = ?, duration_days = ? WHERE id = ?';
     private $message;

@@ -2,7 +2,9 @@
 namespace App;
 class optional_topics extends connect{
     private $queryPost = 'INSERT INTO optional_topics(id_topic, id_team, id_subject, id_camper, id_team_educator) VALUES(:topic, :team, :subject, :camper, :teamEducator)';
-    private $queryGetAll = 'SELECT * FROM optional_topics';
+
+    private $queryGetAll = 'SELECT topics.name_topic,  FROM optional_topics';
+
     private $queryGet = 'SELECT * FROM optional_topics WHERE id = ?';
     private $queryDelete = 'DELETE FROM optional_topics WHERE id = ?';
     private $queryUpdate = 'UPDATE optional_topics SET  id_topic = ?, id_team = ?, id_subject = ?, id_camper = ?, id_team_educator = ? WHERE id = ?';

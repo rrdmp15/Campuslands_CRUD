@@ -2,8 +2,11 @@
 namespace App;
 class themes extends connect{
     private $queryPost = 'INSERT INTO themes(id_chapter, name_theme, start_date, end_date, description, duration_days) VALUES(:chapter,:nameTheme, :startDate, :endDate, :description, :durationDays)';
-    private $queryGetAll = 'SELECT * FROM themes';
-    private $queryGet = 'SELECT * FROM themes WHERE id = ?';
+
+    private $queryGetAll = 'SELECT chapters.name_chapters, themes.name_topic, themes.start_date, themes.end_date, themes.description, themes.duration_days FROM themes INNER JOIN chapters ON themes.id_chapter = chapters.id';
+
+    private $queryGet = 'SELECT chapters.name_chapters, themes.name_topic, themes.start_date, themes.end_date, themes.description, themes.duration_days FROM themes INNER JOIN chapters ON themes.id_chapter = chapters.id WHERE id = ?';
+
     private $queryDelete = 'DELETE FROM themes WHERE id = ?';
     private $queryUpdate = 'UPDATE themes SET id_chapter = ?, name_theme = ?, start_date = ?, end_date = ?, description = ?, duration_days = ? WHERE id = ?';
     private $message;
