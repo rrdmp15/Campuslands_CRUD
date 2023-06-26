@@ -2,8 +2,11 @@
 namespace App;
 class marketing_area extends connect{
     private $queryPost = 'INSERT INTO marketing_area(id_area, id_staff, id_position, id_journey) VALUES(:area,:staff,:position,:journey)';
-    private $queryGetAll = 'SELECT * FROM marketing_area';
-    private $queryGet = 'SELECT * FROM marketing_area WHERE id = ?';
+
+    private $queryGetAll = 'SELECT areas.name_area, staff.first_name, position.name_position, journey.name_journey  FROM marketing_area INNER JOIN areas ON marketing_area.id.area = areas_id INNER JOIN staff ON marketing_area.id_staff = staff.id INNER JOIN position ON marketing_area.id_position = position.id INNER JOIN journey ON marketing_area.id_journey = journey.id';
+
+    private $queryGet = 'SELECT areas.name_area, staff.first_name, position.name_position, journey.name_journey  FROM marketing_area INNER JOIN areas ON marketing_area.id.area = areas_id INNER JOIN staff ON marketing_area.id_staff = staff.id INNER JOIN position ON marketing_area.id_position = position.id INNER JOIN journey ON marketing_area.id_journey = journey.id WHERE id = ?';
+
     private $queryDelete = 'DELETE FROM marketing_area WHERE id = ?';
     private $queryUpdate = 'UPDATE marketing_area SET id_area = ?, id_staff = ?, id_position = ?, id_journey = ? WHERE id = ?';
     private $message;

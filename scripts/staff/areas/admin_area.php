@@ -2,8 +2,11 @@
 namespace App;
 class admin_area extends connect{
     private $queryPost = 'INSERT INTO admin_area(id_area, id_staff, id_position, id_journey) VALUES(:area,:staff,:position,:journey)';
-    private $queryGetAll = 'SELECT * FROM admin_area';
-    private $queryGet = 'SELECT * FROM admin_area WHERE id = ?';
+
+    private $queryGetAll = 'SELECT areas.name_area, staff.first_name, position.name_position, journey.name_journey  FROM admin_area INNER JOIN areas ON admin_area.id_area = areas.id INNER JOIN staff ON admin_area.id_staff = staff.id INNER JOIN position ON admin_area.id_position = position.id INNER JOIN journey ON admin_area.id_journey = journey.id';
+
+    private $queryGet = 'SELECT areas.name_area, staff.first_name, position.name_position, journey.name_journey  FROM admin_area INNER JOIN areas ON admin_area.id_area = areas.id INNER JOIN staff ON admin_area.id_staff = staff.id INNER JOIN position ON admin_area.id_position = position.id INNER JOIN journey ON admin_area.id_journey = journey.id WHERE id = ?';
+    
     private $queryDelete = 'DELETE FROM admin_area WHERE id = ?';
     private $queryUpdate = 'UPDATE admin_area SET id_area = ?, id_staff = ?, id_position = ?, id_journey = ? WHERE id = ?';
     private $message;

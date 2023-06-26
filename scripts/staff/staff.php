@@ -2,10 +2,15 @@
     namespace App;
     class staff extends connect{
         private $queryPost = 'INSERT INTO staff(doc, first_name, second_name, first_surname, second_surname, eps, id_area, id_city) VALUES(:cc,:firstName,:secondName,:firstSurname,:secondSurname, :eps, :idArea, :idCity)';
-        private $queryGetAll = 'SELECT * FROM staff';
-        private $queryGet = 'SELECT * FROM staff WHERE id = ?';
+
+        private $queryGetAll = 'SELECT staff.doc, staff.first_name, staff.second_name, staff.first_surname, staff.second_surname, staff.eps, areas.name_area, cities.name_city FROM ((staff INNER JOIN areas ON staff.id_area = areas.id) INNER JOIN cities ON staff.id_city = cities.id)';
+
+        private $queryGet = 'SELECT staff.doc, staff.first_name, staff.second_name, staff.first_surname, staff.second_surname, staff.eps, areas.name_area, cities.name_city FROM ((staff INNER JOIN areas ON staff.id_area = areas.id) INNER JOIN cities ON staff.id_city = cities.id) WHERE id = ?';
+
         private $queryDelete = 'DELETE FROM staff WHERE id = ?';
+
         private $queryUpdate = 'UPDATE staff SET doc = ?, first_name = ?, second_name = ?, first_surname = ?, second_surname = ?, eps = ?, id_area = ?, id_city = ? WHERE id = ?';
+        
         private $message;
         use getInstance;
         function __construct(private $doc = 1, public $first_name = 1, public $second_name = 1, public $first_surname = 1, public $second_surname = 1, public $eps = 1,public $id_area = 1, public $id_city = 1){

@@ -2,10 +2,15 @@
 namespace App;
 class working_info extends connect{
     private $queryPost = 'INSERT INTO working_info(id_staff, years_exp, months_exp, id_work_reference, id_personal_ref, start_contract, end_contract) VALUES(:idStaff,:years_exp,:months_exp,:id_work_reference,:id_personal_ref, :start_contract, :end_contract)';
-    private $queryGetAll = 'SELECT * FROM working_info';
-    private $queryGet = 'SELECT * FROM working_info WHERE id = ?';
+
+    private $queryGetAll = 'SELECT staff.first_name, working_info.years_exp, working_info.months_exp, work_reference.full_name, personal_ref.full_name,  working_info.start_contract, working_info.end_contract FROM working_info INNER JOIN staff ON working_info.id_staff = staff.id INNER JOIN work_reference ON working_info.id_work_reference = work_reference.id INNER JOIN personal_ref ON working_info.id_personal_ref = personal_ref.id ';
+
+    private $queryGet = 'SELECT staff.first_name, working_info.years_exp, working_info.months_exp, work_reference.full_name, personal_ref.full_name,  working_info.start_contract, working_info.end_contract FROM working_info INNER JOIN staff ON working_info.id_staff = staff.id INNER JOIN work_reference ON working_info.id_work_reference = work_reference.id INNER JOIN personal_ref ON working_info.id_personal_ref = personal_ref.id  WHERE id = ?';
+
     private $queryDelete = 'DELETE FROM working_info WHERE id = ?';
+
     private $queryUpdate = 'UPDATE working_info SET id_staff = ?, years_exp = ?, months_exp = ?, id_work_reference = ?, id_personal_ref = ?, start_contract = ?, end_contract = ? WHERE id = ?';
+
     private $message;
     use getInstance;
     function __construct(private $id_staff = 1, public $years_exp = 1, public $months_exp = 1, public $id_work_reference = 1, public $id_personal_ref = 1, public $start_contract = 1,public $end_contract = 1){

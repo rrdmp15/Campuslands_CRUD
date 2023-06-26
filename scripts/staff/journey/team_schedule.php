@@ -2,10 +2,15 @@
 namespace App;
 class team_schedule extends connect{
     private $queryPost = 'INSERT INTO team_schedule(team_name, check_in_skills, check_out_skills, check_in_soft, check_out_soft, check_in_english, check_out_english, check_in_review, check_out_review, id_journey) VALUES(:teamName,:InSkills,:outSkills,:inSoft,:outSoft, :inEnglish, :outEnglish, :inReview, :outReview, :idJourney)';
-    private $queryGetAll = 'SELECT * FROM team_schedule';
-    private $queryGet = 'SELECT * FROM team_schedule WHERE id = ?';
+
+    private $queryGetAll = 'SELECT team_schedule.team_name, team_schedule.check_in_skills, team_schedule.check_out_skills, team_schedule.check_in_soft, team_schedule.check_out_soft, team_schedule.check_in_english, team_schedule.check_out_english, team_schedule.check_in_review, team_schedule.check_out_review, journey.name_journey FROM team_schedule INNER JOIN journey ON team_schedule.id_journey = journey.id';
+
+    private $queryGet = 'SELECT team_schedule.team_name, team_schedule.check_in_skills, team_schedule.check_out_skills, team_schedule.check_in_soft, team_schedule.check_out_soft, team_schedule.check_in_english, team_schedule.check_out_english, team_schedule.check_in_review, team_schedule.check_out_review, journey.name_journey FROM team_schedule INNER JOIN journey ON team_schedule.id_journey = journey.id WHERE id = ?';
+
     private $queryDelete = 'DELETE FROM team_schedule WHERE id = ?';
+
     private $queryUpdate = 'UPDATE team_schedule SET team_name = ?, check_in_skills = ?, check_out_skills = ?, check_in_soft = ?, check_out_soft = ?, check_in_english = ?, check_out_english = ?, check_in_review = ?, check_out_review = ?, id_journey = ? WHERE id = ?';
+
     private $message;
     use getInstance;
     function __construct(public $team_name = 1, public $check_in_skills = 1, public $check_out_skills = 1, public $check_in_soft = 1, public $check_out_soft = 1, public $check_in_english = 1,public $check_out_english = 1, public $check_in_review = 1, public $check_out_review = 1, public $id_journey = 1){

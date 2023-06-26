@@ -2,8 +2,11 @@
 namespace App;
 class review_skills extends connect{
     private $queryPost = 'INSERT INTO review_skills(id_team_schedule, id_journey, id_tutor, id_location) VALUES(:teamSchedule,:journey,:tutor,:location)';
-    private $queryGetAll = 'SELECT * FROM review_skills';
-    private $queryGet = 'SELECT * FROM review_skills WHERE id = ?';
+
+    private $queryGetAll = 'SELECT team_schedule.team_name, journey.name_journey, tutor.first_name, locations.name_location FROM review_skills INNER JOIN team_schedule ON review_skills.id_team_schedule = team_schedule.id INNER JOIN journey ON review_skills.id_journey = journey.id INNER JOIN tutors ON review_skills.id_tutor = tutors.id INNER JOIN staff as tutor ON tutors.id_staff = tutor.id INNER JOIN locations ON review_skills.id_location = locations.id';
+
+    private $queryGet = 'SELECT team_schedule.team_name, journey.name_journey, tutor.first_name, locations.name_location FROM review_skills INNER JOIN team_schedule ON review_skills.id_team_schedule = team_schedule.id INNER JOIN journey ON review_skills.id_journey = journey.id INNER JOIN tutors ON review_skills.id_tutor = tutors.id INNER JOIN staff as tutor ON tutors.id_staff = tutor.id INNER JOIN locations ON review_skills.id_location = locations.id WHERE id = ?';
+
     private $queryDelete = 'DELETE FROM review_skills WHERE id = ?';
     private $queryUpdate = 'UPDATE review_skills SET id_team_schedule = ?, id_journey = ?, id_tutor = ?, id_location = ? WHERE id = ?';
     private $message;

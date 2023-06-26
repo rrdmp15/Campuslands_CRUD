@@ -1,18 +1,21 @@
 <?php
 namespace App;
-class psycologist extends connect{
-    private $queryPost = 'INSERT INTO psycologist(id_staff, id_academic_area, id_position) VALUES(:staff,:academicArea, :position)';
-    private $queryGetAll = 'SELECT * FROM psycologist';
-    private $queryGet = 'SELECT * FROM psycologist WHERE id = ?';
-    private $queryDelete = 'DELETE FROM psycologist WHERE id = ?';
-    private $queryUpdate = 'UPDATE psycologist SET id_staff = ?, id_academic_area = ? WHERE id = ?';
+class psychologist extends connect{
+    private $queryPost = 'INSERT INTO psychologist(id_staff, id_academic_area, id_position) VALUES(:staff,:academicArea, :position)';
+
+    private $queryGetAll = 'SELECT staff.first_name, academic.name_area, position.name_position FROM psychologist INNER JOIN staff ON psychologist.id_staff = staff.id INNER JOIN academic_area ON psychologist.id_academic_area = academic_area.id INNER JOIN areas as academic ON academic_area.id_area = academic.id INNER JOIN position ON psychologist.id_position = position.id';
+
+    private $queryGet = 'SELECT * FROM psychologist WHERE id = ?';
+
+    private $queryDelete = 'DELETE FROM psychologist WHERE id = ?';
+    private $queryUpdate = 'UPDATE psychologist SET id_staff = ?, id_academic_area = ? WHERE id = ?';
     private $message;
     use getInstance;
     function __construct(public $id_staff = 1, public $id_academic_area = 1, public $id_position = 1){
         parent::__construct();
     }
 
-    public function postPsycologist(){
+    public function postPsychologist(){
         try {
             $res = $this->conx->prepare($this->queryPost);
             $res->bindValue("staff", $this->id_staff);
@@ -27,7 +30,7 @@ class psycologist extends connect{
         }
     }
 
-    public function getAllPsycologist(){
+    public function getAllPsychologist(){
         try {
             $res = $this->conx->prepare($this->queryGetAll);
             $res->execute();
@@ -39,7 +42,7 @@ class psycologist extends connect{
         }
     }
 
-    public function getPsycologist($id){
+    public function getPsychologist($id){
         try{
             $res = $this -> conx -> prepare($this -> queryGet);
             $res -> execute([$id]);
@@ -51,7 +54,7 @@ class psycologist extends connect{
         }
     }
 
-    public function deletePsycologist($id){
+    public function deletePsychologist($id){
         try{
 
             $res = $this -> conx -> prepare($this->queryDelete);
@@ -65,7 +68,7 @@ class psycologist extends connect{
         }
     }
 
-    public function updatePsycologist( $id_staff, $id_academic_area, $id_position, $id){
+    public function updatePsychologist( $id_staff, $id_academic_area, $id_position, $id){
         try{
           $res = $this->conx->prepare($this->queryUpdate);
             $res->execute([$id_staff, $id_academic_area, $id_position, $id]);

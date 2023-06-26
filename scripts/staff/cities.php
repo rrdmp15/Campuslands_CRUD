@@ -2,8 +2,8 @@
 namespace App;
 class cities extends connect{
     private $queryPost = 'INSERT INTO cities(name_city, id_region) VALUES(:cities,:region)';
-    private $queryGetAll = 'SELECT * FROM cities';
-    private $queryGet = 'SELECT * FROM cities WHERE id = ?';
+    private $queryGetAll = 'SELECT cities.name_city, regions.name_region FROM cities INNER JOIN regions ON cities.id_region = regions.id';
+    private $queryGet = 'SELECT cities.name_city, regions.name_region FROM cities INNER JOIN regions ON cities.id_region = regions.id WHERE id = ?';
     private $queryDelete = 'DELETE FROM cities WHERE id = ?';
     private $queryUpdate = 'UPDATE cities SET name_city = ?, id_region = ? WHERE id = ?';
     private $message;

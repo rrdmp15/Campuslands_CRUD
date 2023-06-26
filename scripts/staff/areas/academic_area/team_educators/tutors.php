@@ -2,8 +2,11 @@
 namespace App;
 class tutors extends connect{
     private $queryPost = 'INSERT INTO tutors(id_staff, id_academic_area, id_position) VALUES(:staff,:academicArea, :position)';
-    private $queryGetAll = 'SELECT * FROM tutors';
-    private $queryGet = 'SELECT * FROM tutors WHERE id = ?';
+
+    private $queryGetAll = 'SELECT staff.first_name, academic.name_area, position.name_position FROM tutors INNER JOIN staff ON tutors.id_staff = staff.id INNER JOIN academic_area ON tutors.id_academic_area = academic_area.id INNER JOIN areas as academic ON academic_area.id_area = academic.id INNER JOIN position ON tutors.id_position = position.id';
+
+    private $queryGet = 'SELECT staff.first_name, academic.name_area, position.name_position FROM tutors INNER JOIN staff ON tutors.id_staff = staff.id INNER JOIN academic_area ON tutors.id_academic_area = academic_area.id INNER JOIN areas as academic ON academic_area.id_area = academic.id INNER JOIN position ON tutors.id_position = position.id WHERE id = ?';
+
     private $queryDelete = 'DELETE FROM tutors WHERE id = ?';
     private $queryUpdate = 'UPDATE tutors SET id_staff = ?, id_academic_area = ? WHERE id = ?';
     private $message;

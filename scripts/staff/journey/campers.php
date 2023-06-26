@@ -2,10 +2,15 @@
 namespace App;
 class campers extends connect{
     private $queryPost = 'INSERT INTO campers(id_team_schedule, id_team_route, id_trainer, id_psycologist, id_teacher, id_level, id_journey, id_staff) VALUES(:teamSchedule,:teamRoute,:trainer,:psycologist,:teacher, :level, :journey, :staff)';
-    private $queryGetAll = 'SELECT * FROM campers';
-    private $queryGet = 'SELECT * FROM campers WHERE id = ?';
+
+    private $queryGetAll = 'SELECT team_schedule.team_name, routes.name_route, trainer.first_name AS nombre_trainer, psychologists.first_name AS nombre_psychologist, teacher.first_name AS nombre_teacher, levels.name_level, journey.name_journey, camper.first_name AS nombre_camper FROM campers INNER JOIN team_schedule ON campers.id_team_schedule = team_schedule.id INNER JOIN routes ON campers.id_route = routes.id INNER JOIN trainers ON campers.id_trainer = trainers.id INNER JOIN staff AS trainer ON Trainers.id_staff = trainers.id INNER JOIN psychologist ON campers.id_psycologist = psychologist.id INNER JOIN staff AS psychologists ON psychologist.id_staff = psychologists.id INNER JOIN teachers ON Campers.id_teacher = teachers.id INNER JOIN staff AS teacher ON teachers.id_staff = teacher.id INNER JOIN levels ON campers.id_level = levels.id INNER JOIN journey ON campers.id_journey = journey.id INNER JOIN staff AS camper ON campers.id_staff = camper.id';
+
+    private $queryGet = 'SELECT team_schedule.team_name, routes.name_route, trainer.first_name AS nombre_trainer, psychologists.first_name AS nombre_psychologist, teacher.first_name AS nombre_teacher, levels.name_level, journey.name_journey, camper.first_name AS nombre_camper FROM campers INNER JOIN team_schedule ON campers.id_team_schedule = team_schedule.id INNER JOIN routes ON campers.id_route = routes.id INNER JOIN trainers ON campers.id_trainer = trainers.id INNER JOIN staff AS trainer ON Trainers.id_staff = trainers.id INNER JOIN psychologist ON campers.id_psycologist = psychologist.id INNER JOIN staff AS psychologists ON psychologist.id_staff = psychologists.id INNER JOIN teachers ON Campers.id_teacher = teachers.id INNER JOIN staff AS teacher ON teachers.id_staff = teacher.id INNER JOIN levels ON campers.id_level = levels.id INNER JOIN journey ON campers.id_journey = journey.id INNER JOIN staff AS camper ON campers.id_staff = camper.id WHERE id = ?';
+
     private $queryDelete = 'DELETE FROM campers WHERE id = ?';
+
     private $queryUpdate = 'UPDATE campers SET id_team_schedule = ?, id_team_route = ?, id_trainer = ?, id_psycologist = ?, id_teacher = ?, id_level = ?, id_journey = ?, id_staff = ? WHERE id = ?';
+
     private $message;
     use getInstance;
     function __construct(private $id_team_schedule = 1, public $id_team_route = 1, public $id_trainer = 1, public $id_psycologist = 1, public $id_teacher = 1, public $id_level = 1,public $id_journey = 1, public $id_staff = 1){

@@ -2,12 +2,18 @@
 namespace App;
 class contact_info extends connect{
     private $queryPost = 'INSERT INTO contact_info(id_staff, whatsapp, instagram, linkedin, email, address, cel_number) VALUES(:idStaff,:whatsapp,:instagram,:linkedin,:email, :address, :celNumber)';
-    private $queryGetAll = 'SELECT * FROM contact_info';
-    private $queryGet = 'SELECT * FROM contact_info WHERE id = ?';
+
+    private $queryGetAll = 'SELECT staff.first_name, contact_info.whatsapp, conatct_info.instagram, conatct_info.linkedin, conatct_info.email, conatct_info.address, conatct_info.cel_number FROM contact_info INNER JOIN staff ON conatct_info.id_staff = staff.id';
+
+    private $queryGet = 'SELECT * FROM contact_info SELECT staff.first_name, contact_info.whatsapp, conatct_info.instagram, conatct_info.linkedin, conatct_info.email, conatct_info.address, conatct_info.cel_number FROM contact_info INNER JOIN staff ON conatct_info.id_staff = staff.id WHERE id = ?';
+
     private $queryDelete = 'DELETE FROM contact_info WHERE id = ?';
+    
     private $queryUpdate = 'UPDATE contact_info SET id_staff = ?, whatsapp = ?, instagram = ?, linkedin = ?, email = ?, address = ?, cel_number = ? WHERE id = ?';
+
     private $message;
     use getInstance;
+    
     function __construct(private $id_staff = 1, public $whatsapp = 1, public $instagram = 1, public $linkedin = 1, public $email = 1, public $address = 1,public $cel_number = 1){
         parent::__construct();
     }

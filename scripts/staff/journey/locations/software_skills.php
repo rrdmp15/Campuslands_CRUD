@@ -2,8 +2,10 @@
 namespace App;
 class software_skills extends connect{
     private $queryPost = 'INSERT INTO software_skills(id_team_schedule, id_journey, id_trainer, id_location, id_subject) VALUES(:teamSchedule,:journey,:trainer,:location,:subject)';
-    private $queryGetAll = 'SELECT * FROM software_skills';
-    private $queryGet = 'SELECT * FROM software_skills WHERE id = ?';
+    private $queryGetAll = 'SELECT team_schedule.team_name, journey.name_journey, trainer.first_name, locations.name_location, subjects.name_subject FROM software_skills INNER JOIN team_schedule ON software_skills.id_team_schedule = team_schedule.id INNER JOIN journey ON software_skills.id_journey = journey.id INNER JOIN trainers ON software_skills.id_trainer = trainers.id INNER JOIN staff as trainer ON trainers.id_staff = trainer.id INNER JOIN locations ON software_skills.id_location = locations.id INNER JOIN subjects ON software_skills.id_subject = subjects.id';
+
+    private $queryGet = 'SELECT team_schedule.team_name, journey.name_journey, trainer.first_name, locations.name_location, subjects.name_subject FROM software_skills INNER JOIN team_schedule ON software_skills.id_team_schedule = team_schedule.id INNER JOIN journey ON software_skills.id_journey = journey.id INNER JOIN trainers ON software_skills.id_trainer = trainers.id INNER JOIN staff as trainer ON trainers.id_staff = trainer.id INNER JOIN locations ON software_skills.id_location = locations.id INNER JOIN subjects ON software_skills.id_subject = subjects.id WHERE id = ?';
+    
     private $queryDelete = 'DELETE FROM software_skills WHERE id = ?';
     private $queryUpdate = 'UPDATE software_skills SET id_team_schedule = ?, id_journey = ?, id_trainer = ?, id_location = ?, id_subject = ? WHERE id = ?';
     private $message;

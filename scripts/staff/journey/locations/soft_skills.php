@@ -2,8 +2,10 @@
 namespace App;
 class soft_skills extends connect{
     private $queryPost = 'INSERT INTO soft_skills(id_team_schedule, id_journey, id_psycologist, id_location, id_subject) VALUES(:teamSchedule,:journey,:psycologist,:location,:subject)';
-    private $queryGetAll = 'SELECT * FROM soft_skills';
-    private $queryGet = 'SELECT * FROM soft_skills WHERE id = ?';
+
+    private $queryGetAll = 'SELECT team_schedule.team_name, journey.name_journey, psychologists.first_name, locations.name_location, subjects.name_subject FROM soft_skills INNER JOIN team_schedule ON soft_skills.id_team_schedule = team_schedule.id INNER JOIN journey ON soft_skills.id_journey = journey.id INNER JOIN psychologist ON soft_skills.id_psychologist = psychologist.id INNER JOIN staff as psychologists ON psychologist.id_staff = psychologists.id INNER JOIN locations ON soft_skills.id_location = locations.id INNER JOIN subjects ON soft_skills.id_subject = subjects.id';
+
+    private $queryGet = 'SELECT team_schedule.team_name, journey.name_journey, psychologists.first_name, locations.name_location, subjects.name_subject FROM soft_skills INNER JOIN team_schedule ON soft_skills.id_team_schedule = team_schedule.id INNER JOIN journey ON soft_skills.id_journey = journey.id INNER JOIN psychologist ON soft_skills.id_psychologist = psychologist.id INNER JOIN staff as psychologists ON psychologist.id_staff = psychologists.id INNER JOIN locations ON soft_skills.id_location = locations.id INNER JOIN subjects ON soft_skills.id_subject = subjects.id WHERE id = ?';
     private $queryDelete = 'DELETE FROM soft_skills WHERE id = ?';
     private $queryUpdate = 'UPDATE soft_skills SET id_team_schedule = ?, id_journey = ?, id_psycologist = ?, id_location = ?, id_subject = ? WHERE id = ?';
     private $message;
