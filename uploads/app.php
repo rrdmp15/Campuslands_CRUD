@@ -3,9 +3,13 @@
 
     $router = new \Bramus\Router\Router();
 
-    $router->get('/campus', function() {
-        echo 'Hola Mundo';
-    });
+    $routes = glob(__DIR__ . '/../scripts/routes/*.php');
+
+    foreach ($routes as $route) {
+        $fileName = basename($route, '.php');
+        $className = "\App\\" . $fileName;
+        $className::getInstance()->configureRoutes($router);
+    }
 
     $router->run();
 
