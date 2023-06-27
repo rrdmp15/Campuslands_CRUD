@@ -2,8 +2,11 @@
 namespace App;
 class chapters extends connect{
     private $queryPost = 'INSERT INTO chapters(id_thematic_units, name_chapter, start_date, end_date, description, duration_days) VALUES(:thematicUnits,:nameChapter, :startDate, :endDate, :description, :durationDays)';
-    private $queryGetAll = 'SELECT * FROM chapters';
-    private $queryGet = 'SELECT * FROM chapters WHERE id = ?';
+
+    private $queryGetAll = 'SELECT thematic_units.name_thematics_units, chapters.name_chapter, chapters.start_date, chapters.end_date, chapters.description, chapters.duration_days FROM chapters INNER JOIN thematic_units ON chapters.id_thematic_units = thematic_units.id';
+
+    private $queryGet = 'SELECT thematic_units.name_thematics_units, chapters.name_chapter, chapters.start_date, chapters.end_date, chapters.description, chapters.duration_days FROM chapters INNER JOIN thematic_units ON chapters.id_thematic_units = thematic_units.id WHERE id = ?';
+
     private $queryDelete = 'DELETE FROM chapters WHERE id = ?';
     private $queryUpdate = 'UPDATE chapters SET id_thematic_units = ?, name_chapter = ?, start_date = ?, end_date = ?, description = ?, duration_days = ? WHERE id = ?';
     private $message;

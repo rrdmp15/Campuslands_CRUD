@@ -3,9 +3,10 @@ namespace App;
 class optional_topics extends connect{
     private $queryPost = 'INSERT INTO optional_topics(id_topic, id_team, id_subject, id_camper, id_team_educator) VALUES(:topic, :team, :subject, :camper, :teamEducator)';
 
-    private $queryGetAll = 'SELECT topics.name_topic,  FROM optional_topics';
+    private $queryGetAll = 'SELECT topics.name_topic, team_schedule.team_name, subjects.name_subject, camper.first_name, team_educators.name_rol FROM optional_topics INNER JOIN topics ON optional_topics.id_topic = topics.id INNER JOIN team_schedule ON optional_topics.id_team = team_schedule.id INNER JOIN subjects ON optional_topics.id_subject = subjects.id INNER JOIN campers ON optional_topics.id_camper = campers.id INNER JOIN staff as camper ON campers.id_staff = camper.id INNER JOIN team_educators ON optional_topics.id_team_educator = team_educators.id';
 
-    private $queryGet = 'SELECT * FROM optional_topics WHERE id = ?';
+    private $queryGet = 'SELECT topics.name_topic, team_schedule.team_name, subjects.name_subject, camper.first_name, team_educators.name_rol FROM optional_topics INNER JOIN topics ON optional_topics.id_topic = topics.id INNER JOIN team_schedule ON optional_topics.id_team = team_schedule.id INNER JOIN subjects ON optional_topics.id_subject = subjects.id INNER JOIN campers ON optional_topics.id_camper = campers.id INNER JOIN staff as camper ON campers.id_staff = camper.id INNER JOIN team_educators ON optional_topics.id_team_educator = team_educators.id WHERE id = ?';
+
     private $queryDelete = 'DELETE FROM optional_topics WHERE id = ?';
     private $queryUpdate = 'UPDATE optional_topics SET  id_topic = ?, id_team = ?, id_subject = ?, id_camper = ?, id_team_educator = ? WHERE id = ?';
     private $message;
